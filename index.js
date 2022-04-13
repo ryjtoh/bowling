@@ -1,12 +1,17 @@
 const canvas = document.getElementById("canvas") 
 const ctx = canvas.getContext("2d")
-{
-    "holeSpots" = [
-        {600:0, 0: 600}
-    ]
-}
 
+var holes = 
+    {
+        "holeSpots":[
+          {"slope": 1, "yInt": 5, "x1": 300, "y1": 0, "x2": 0, "y2": 300},
+          {"slope": 4, "yInt": -2, "x1": 450, "y1": 0, "x2": 300, "y2": 600},
+          {"slope": 5, "yInt": 5, "x1": 180, "y1": 0, "x2": 60, "y2": 600},
+          {"slope": -2, "yInt": 4, "x1": 390, "y1": 600, "x2": 90, "y2": 0}
+        ]
+    }
 
+console.log(holes.holeSpots[2].x1)
 
 canvas.width = 600
 canvas.height = 600
@@ -18,7 +23,7 @@ const centerHeight = canvas.height / 2
 var sideLength = 600
 var unit = 30
 
-// 
+// Ball coordinates and slope
 var dx = 1
 var dy = -1
 var blueBallX = centerWidth
@@ -26,36 +31,65 @@ var blueBallY = centerHeight
 var redBallX = centerWidth
 var redBallY = centerHeight
 
+// Hole coordinates and slope + y-intercept
+var holeTurn = 0
+var blueHoleX
+var blueHoleY
+var redHoleX
+var redHoleY
+var holeSlope
+var holeYInt
 // Function to create grid
 function drawBoard() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
     for (var x = 0; x <= sideLength; x += unit) {
         ctx.moveTo(0.5 + x, 0)
         ctx.lineTo(0.5 + x, sideLength)
         ctx.moveTo(0, 0.5 + x)
         ctx.lineTo(sideLength, 0.5 + x)
     }
-
     ctx.strokeStyle = "black"
     ctx.stroke()
+
+    blueHoleX = holes.holeSpots[holeTurn].x1
+    blueHoleY = holes.holeSpots[holeTurn].y1
+    redHoleX = holes.holeSpots[holeTurn].x2
+    redHoleY = holes.holeSpots[holeTurn].y2
+    holeSlope = holes.holeSpots[holeTurn].slope
+    holeYInt = holes.holeSpots[holeTurn].yInt
+    holeTurn++
+    if (holeTurn > 3) {
+        holeTurn = 0
+    }
+    drawHole(blueHoleX, blueHoleY, "blue")
+    drawHole(redHoleX, redHoleY, "red")
+
+    emptyGrid = ctx.getImageData(0, 0, canvas.width, canvas.height)
+    document.getElementById("slope").value = 1
+    document.getElementById("showYInt").value = 0
+    drawDefaultSlope()
 }
 
 drawBoard()
-createHoles()
+
 // Save state of empty grid
 var emptyGrid = ctx.getImageData(0, 0, canvas.width, canvas.height)
 
 
 // Draw default slope lines (y = x)
-ctx.beginPath()
-ctx.moveTo(centerWidth, centerHeight)
-ctx.lineTo(-900, 1500)
-ctx.strokeStyle = "red"
-ctx.stroke()
-ctx.beginPath()
-ctx.moveTo(centerWidth, centerHeight)
-ctx.lineTo(1500, -900)
-ctx.strokeStyle = "blue"
-ctx.stroke()
+function drawDefaultSlope() {
+    ctx.beginPath()
+    ctx.moveTo(centerWidth, centerHeight)
+    ctx.lineTo(-900, 1500)
+    ctx.strokeStyle = "red"
+    ctx.stroke()
+    ctx.beginPath()
+    ctx.moveTo(centerWidth, centerHeight)
+    ctx.lineTo(1500, -900)
+    ctx.strokeStyle = "blue"
+    ctx.stroke()
+}
+
 
 
 
@@ -129,7 +163,7 @@ function drawRedBall() {
 }
 // Draw the next golf ball frame
 function draw() {
-    ctx.putImageData(currEquation, 0, 0)
+    ctx.putImageData(emptyGrid, 0, 0)
     drawBlueBall()
     drawRedBall()
     blueBallX += dx;
@@ -142,7 +176,7 @@ function draw() {
 function startSwing() {
     calibrateSwing()
     let swung = setInterval(() => draw(), 10 + dy * dy)
-    setTimeout(() => { clearInterval(swung) }, 2000);
+    setTimeout(() => { clearInterval(swung), outcome() }, 4000);
 }
 // Changes the starting ball position and track angle based on slider fields
 function calibrateSwing() {
@@ -157,22 +191,35 @@ function calibrateSwing() {
 
 // Creates the holes
 function createHoles() {
-    let randomSlope = Math.round(Math.random() * (10 - (-10) - 10))
-    let randomYInt = Math.round(Math.random() * (5 - (-5) - 5))
-    let randomX = Math.round(Math.random() * (5 - (-5) - 5))
-    let x1 = holeSpots[0][0][0]
-    let y1 = holeSpots[0][0][1]
-    let x2 = holeSpots[0][1][0]
-    let y2 = holeSpots[0][1][1]
-    drawHole(x1, y1)
-    drawHole(x2, y2)
-    
+    blueHoleX = holes.holeSpots[holeTurn].x1
+    blueHoleY = holes.holeSpots[holeTurn].y1
+    redHoleX = holes.holeSpots[holeTurn].x2
+    redHoleY = holes.holeSpots[holeTurn].y2
+    holeSlope = holes.holeSpots[holeTurn].slope
+    holeYInt = holes.holeSpots[holeTurn].yInt
+    holeTurn++
+    if (holeTurn > 3) {
+        holeTurn = 0
+    }
+    drawHole(blueHoleX, blueHoleY, "blue")
+    drawHole(redHoleX, redHoleY, "red")
 }
 
-function drawHole(x, y) {
+function drawHole(x, y, color) {
     ctx.beginPath();
     ctx.arc(x, y, 10, 0, Math.PI*2);
-    ctx.fillStyle = "#000000";
+    ctx.fillStyle = color;
     ctx.fill();
     ctx.stroke()
+}
+
+function outcome() {
+    var message = ""
+    if (slopeSlider.value == holeSlope && yInterceptSlider.value == holeYInt) {
+        message = "Correct slope and y-intercept!"
+    } else {
+        message = "Not quite right... try again!"
+    }
+    alert(message)
+    drawBoard()
 }
