@@ -10,6 +10,11 @@
   <body>
       <h1>Bowling</h1>
       <canvas id="canvas"></canvas>
+      <div id="sliders">
+        <input type="range" id="slope" min="-5" max="5" value="0" title="slope of line" oninput="changeLine()" />
+        <input type="range" id="y-intercept" min="-5" max="5" value="0" title="y-intercept of line" oninput="changeLine()" />
+      </div>
+
 	<script src="index.js"></script>
   </body>
 </html>
