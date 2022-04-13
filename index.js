@@ -39,6 +39,10 @@ var redHoleX
 var redHoleY
 var holeSlope
 var holeYInt
+
+// Save the state of the empty grid with default slope line
+var emptyGrid
+
 // Function to create grid
 function drawBoard() {
     ctx.clearRect(0, 0, canvas.width, canvas.height)
@@ -72,8 +76,6 @@ function drawBoard() {
 
 drawBoard()
 
-// Save state of empty grid
-var emptyGrid = ctx.getImageData(0, 0, canvas.width, canvas.height)
 
 
 // Draw default slope lines (y = x)
