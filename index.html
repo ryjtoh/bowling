@@ -4,22 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Double Golf!</title>
+    <title>Two Swings!</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/x-icon" href="favicon-32x32.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@500&family=Open+Sans:wght@700&display=swap" rel="stylesheet">
   </head>
   <body>
-      <h1>Bowling</h1>
-      <canvas id="canvas"></canvas>
-      <div id="sliders">
-        <input type="range" id="slope" min="-10" max="10" value="1" title="slope of line" onchange="changeLine()" />
-        <input type="range" id="y-intercept" min="-10" max="10" value="0" title="y-intercept of line" onchange="changeLine()" />
+      <h1>Two Swings!</h1>
+      <p id="description">Description</p>
+      <div id="activity">
+        <canvas id="canvas"></canvas>
+        <div id="controls">
+          <div id="equation">
+            <span> y   =    </span>
+            <span id="showSlope"> _ </span>
+            <span>  *  x  +  </span>
+            <span id="showYInt">_ </span>
+          </div>
+          <span class="sliderTitle">Slope</span>
+          <div class="slider">
+            <input type="range" id="slope" min="-10" max="10" value="1" title="slope of line" oninput="changeLine()" />
+            <p id="rangeValue">1</p>
+          </div>
+          <span class="sliderTitle">Y-Intercept</span>
+          <div class="slider">
+            <input type="range" id="y-intercept" min="-10" max="10" value="0" title="y-intercept of line" oninput="changeLine()" />
+            <p id="rangeValue">0</p>
+          </div>
+          <button id="execute" onclick="startSwing()">Swing!</button>
+        </div>
       </div>
-      <span>y = </span>
-      <span id="showSlope">_</span>
-      <span> * x + </span>
-      <span id="showYInt">_</span>
-      <button id="execute" onclick="startSwing()"></button>
 	<script src="index.js"></script>
   </body>
 </html>

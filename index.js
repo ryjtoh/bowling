@@ -52,7 +52,8 @@ function drawBoard() {
         ctx.moveTo(0, 0.5 + x)
         ctx.lineTo(sideLength, 0.5 + x)
     }
-    ctx.strokeStyle = "black"
+    ctx.strokeStyle = "#464866"
+    ctx.lineCap = "round"
     ctx.stroke()
 
     blueHoleX = holes.holeSpots[holeTurn].x1
@@ -65,8 +66,8 @@ function drawBoard() {
     if (holeTurn > 3) {
         holeTurn = 0
     }
-    drawHole(blueHoleX, blueHoleY, "blue")
-    drawHole(redHoleX, redHoleY, "red")
+    drawHole(blueHoleX, blueHoleY, "#29648a")
+    drawHole(redHoleX, redHoleY, "#6e1014")
 
     emptyGrid = ctx.getImageData(0, 0, canvas.width, canvas.height)
     document.getElementById("slope").value = 1
@@ -76,20 +77,22 @@ function drawBoard() {
 
 drawBoard()
 
-
-
 // Draw default slope lines (y = x)
 function drawDefaultSlope() {
     ctx.beginPath()
     ctx.moveTo(centerWidth, centerHeight)
     ctx.lineTo(-900, 1500)
-    ctx.strokeStyle = "red"
+    ctx.strokeStyle = "#6e1014"
+    ctx.lineWidth = 5
     ctx.stroke()
     ctx.beginPath()
     ctx.moveTo(centerWidth, centerHeight)
     ctx.lineTo(1500, -900)
-    ctx.strokeStyle = "blue"
+    ctx.strokeStyle = "#29648a"
     ctx.stroke()
+    ctx.lineWidth = 1
+
+    drawCircle(centerWidth, centerHeight, 5, "#aaabb8")
 }
 
 
@@ -123,15 +126,18 @@ function changeLine() {
     ctx.beginPath()
     ctx.moveTo(centerWidth - yIntercept, centerHeight - yIntercept)
     ctx.lineTo(1500 - yIntercept, y1 - yIntercept)
-    ctx.strokeStyle = "blue"
+    ctx.strokeStyle = "#29648a"
+    ctx.lineWidth = 5
     ctx.stroke()
     // Draw red
     ctx.beginPath()
     ctx.moveTo(centerWidth - yIntercept, centerHeight - yIntercept)
     ctx.lineTo(-900 - yIntercept, y2 - yIntercept)
-    ctx.strokeStyle = "red"
+    ctx.strokeStyle = "#6e1014"
     ctx.stroke()
+    ctx.lineWidth = 1
 
+    drawCircle(centerWidth - yIntercept, centerHeight - yIntercept, 5, "#aaabb8")
     currEquation = ctx.getImageData(0, 0, canvas.width, canvas.height)
     
 }
@@ -145,13 +151,19 @@ function findY2(slope) {
     return (slope * 1200) + 300
 }
 
-
+function drawCircle(x, y, size, color) {
+    ctx.beginPath();
+    ctx.arc(x, y, size, 0, Math.PI*2);
+    ctx.fillStyle = color;
+    ctx.fill();
+    ctx.closePath();
+}
 
 // Blue golf ball graphics
 function drawBlueBall() {
     ctx.beginPath();
     ctx.arc(blueBallX, blueBallY, 10, 0, Math.PI*2);
-    ctx.fillStyle = "#0095DD";
+    ctx.fillStyle = "#29648a";
     ctx.fill();
     ctx.closePath();  
 }
@@ -159,7 +171,7 @@ function drawBlueBall() {
 function drawRedBall() {
     ctx.beginPath();
     ctx.arc(redBallX, redBallY, 10, 0, Math.PI*2);
-    ctx.fillStyle = "#FF0000";
+    ctx.fillStyle = "#6e1014";
     ctx.fill();
     ctx.closePath();
 }
@@ -203,16 +215,15 @@ function createHoles() {
     if (holeTurn > 3) {
         holeTurn = 0
     }
-    drawHole(blueHoleX, blueHoleY, "blue")
-    drawHole(redHoleX, redHoleY, "red")
+    drawHole(blueHoleX, blueHoleY, "#29648a")
+    drawHole(redHoleX, redHoleY, "#6e1014")
 }
 
 function drawHole(x, y, color) {
-    ctx.beginPath();
-    ctx.arc(x, y, 10, 0, Math.PI*2);
-    ctx.fillStyle = color;
-    ctx.fill();
-    ctx.stroke()
+    ctx.beginPath()
+    ctx.arc(x, y, 10, 0, Math.PI*2)
+    ctx.fillStyle = color
+    ctx.fill()
 }
 
 function outcome() {
