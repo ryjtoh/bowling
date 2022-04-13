@@ -9,3 +9,8 @@ body {
 #y-intercept {
     fill: red;
 }
+
+#execute {
+    height: 50px;
+    width: 50px;
+}
