@@ -6,6 +6,7 @@ body {
 #canvas {
     background-color: #25274D;
     border: 1px solid #888888;
+    box-shadow: 5px 10px #888888;
 }
 
 #y-intercept {
@@ -69,6 +70,8 @@ body {
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
+    margin-bottom: 300px;
+    margin-top: 200px;
 }
 
 #equation {
@@ -88,17 +91,26 @@ body {
     align-content:stretch
 }
 
-#description {
-    padding-left: 20px;
-    margin-left: 50px;
-    color: #2e9cca;
-    font-size: 20px;
-    width: 100px;
+#heading {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 50px;
+}
+
+#intro {
+    color:#00acee;
+    background-color: #464866;
+    border-radius: 20px;
+    margin-right: 20px;
+    margin-top: 30px;
+    padding-right: 30px;
+    box-shadow: 5px 10px #888888;
 }
 
 h1 {
-    margin-left: 30px;
-    margin-top: 10px;
+    margin-left: 100px;
+    margin-top: 30px;
     margin-bottom: 5px;
     font-size: 90px;
     color: #2e9cca;
@@ -116,6 +128,7 @@ h1 {
 
 .slider {
     position: relative;
+    width: 400px;
     padding: 20px;
     background: #29648a;
     border-radius: 20px;
@@ -124,8 +137,11 @@ h1 {
     box-shadow: 5px 10px #888888;
 }
 
-.slider p {
-    padding-left: 20px;
+output {
+    position: relative;
+    margin-left: none;
+    padding-left: 50px;
+    padding-right: 20px;
     color: #00acee;
 }
 
@@ -137,6 +153,7 @@ h1 {
     background: #00acee;
     border: none;
     outline: none;
+    margin-left: none;
 }
 
 .slider input[type="range"]::-webkit-slider-thumb {

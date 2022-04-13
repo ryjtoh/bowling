@@ -12,30 +12,51 @@
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@500&family=Open+Sans:wght@700&display=swap" rel="stylesheet">
   </head>
   <body>
-      <h1>Two Swings!</h1>
-      <p id="description">Description</p>
+    <div id="heading">
+      <h1>| Two Swings! |</h1>
+      <div id="intro">
+        <span style="white-space: pre;">  
+          The <u>slope formula</u> y = mx + b is a crucial concept to grasp in algebra. It tells you a straight (linear) line's behavior and is
+          a formula for finding point on that line. Here's a rundown of the variables in the formula: 
+          ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━
+          <em>x</em> : tells the horizontal position on the coordinate system (left/right)
+          <em>y</em> : tells the vertical position on the coordinate system (up/down) 
+          <em>m</em> : the slope, which tell you how steep the line is if you can imagine the positive y direction to be pointing toward the sky! 
+          <em>b</em> : the y-intercept, where the straight line hit the y-axis (the line on the vertical axis)
+          ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━
+          Now that you know a bit about the terminology of the slope formula, lets visualize it using this interactive coordinate system. 
+          - Use the <u>slope slider</u> to control the steepness of the line
+          - Use the <u>y-intercept</u> to control where the line hits the y-axis
+          ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━ ━
+          <u>Instructions:</u>
+          There are going to be 2 golf holes on the coordinate system that fit a particular linear line. 2 golf balls will spawn from the 
+          "middle" of the line, so plan carefully! Your goal is to figure out what line fits using the sliders, then press the swing button 
+          to see if you get two hole in ones!
+        </span> 
+    </div>
+    </div>
       <div id="activity">
-        <canvas id="canvas"></canvas>
-        <div id="controls">
-          <div id="equation">
-            <span> y   =    </span>
-            <span id="showSlope"> _ </span>
-            <span>  *  x  +  </span>
-            <span id="showYInt">_ </span>
-          </div>
-          <span class="sliderTitle">Slope</span>
-          <div class="slider">
-            <input type="range" id="slope" min="-10" max="10" value="1" title="slope of line" oninput="changeLine()" />
-            <p id="rangeValue">1</p>
-          </div>
-          <span class="sliderTitle">Y-Intercept</span>
-          <div class="slider">
-            <input type="range" id="y-intercept" min="-10" max="10" value="0" title="y-intercept of line" oninput="changeLine()" />
-            <p id="rangeValue">0</p>
-          </div>
-          <button id="execute" onclick="startSwing()">Swing!</button>
+      <canvas id="canvas"></canvas>
+      <div id="controls">
+        <div id="equation">
+          <span> y =</span>
+          <span id="showSlope">_</span>
+          <span>* x + </span>
+          <span id="showYInt">_</span>
         </div>
+        <span class="sliderTitle">Slope</span>
+        <div class="slider">
+          <input type="range" id="slope" min="-10" max="10" value="1" title="slope of line" oninput="changeLine();this.nextElementSibling.value = this.value" />
+          <output>1</output>
+        </div>
+        <span class="sliderTitle">Y-Intercept</span>
+        <div class="slider">
+          <input type="range" id="y-intercept" min="-10" max="10" value="0" title="y-intercept of line" oninput="changeLine()" />
+          <output>0</output>
+        </div>
+        <button id="execute" onclick="startSwing()">Swing!</button>
       </div>
-	<script src="index.js"></script>
+    </div>
+	  <script src="index.js"></script>
   </body>
 </html>
