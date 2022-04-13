@@ -43,6 +43,19 @@ var holeYInt
 // Save the state of the empty grid with default slope line
 var emptyGrid
 
+// Workaround for chrome autoplay policy
+document.getElementById("putt").volume = 0.0
+document.getElementById("putt").play()
+document.getElementById("putt").volume = 1.0
+
+document.getElementById("applause").volume = 0.0
+document.getElementById("applause").play()
+document.getElementById("applause").volume = 1.0
+
+document.getElementById("fail").volume = 0.0
+document.getElementById("fail").play()
+document.getElementById("fail").volume = .1
+
 // Function to create grid
 function drawBoard() {
     ctx.clearRect(0, 0, canvas.width, canvas.height)
@@ -173,9 +186,10 @@ function draw() {
 
 // Responds to button to put balls in motion
 function startSwing() {
-    calibrateSwing()
+    document.getElementById("execute").disabled = true
     let swung = setInterval(() => draw(), 10 + dy * dy)
-    setTimeout(() => { clearInterval(swung), outcome() }, 4000)
+    setTimeout(() => { document.getElementById("execute").disabled = false;
+    calibrateSwing();clearInterval(swung), outcome() }, 4000)
 }
 // Changes the starting ball position and track angle based on slider fields
 function calibrateSwing() {
@@ -208,10 +222,18 @@ function createHoles() {
 function outcome() {
     var message = ""
     if (slopeSlider.value == holeSlope && yInterceptSlider.value == holeYInt) {
+        playSound("applause")
         message = "Correct slope and y-intercept!"
     } else {
+        playSound("fail")
         message = "Not quite right... try again!"
     }
     alert(message)
     drawBoard()
+}
+
+// Plays putt noise
+function playSound(name) {
+    document.getElementById(name).play()
+    document.getElementById(name).currentTime = 0
 }

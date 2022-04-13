@@ -1,6 +1,8 @@
 body {
+    background: url(imgs/golfcourse.png);
     background-color: #25274D;
     font-family: "Lora", serif;
+    
 }
 
 #canvas {
@@ -30,6 +32,19 @@ body {
     transition-duration: 0.4s;
     box-shadow: 5px 10px #888888;
     border: none;
+    animation: bounce 3s infinite;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-30px);
+    }
+    60% {
+        transform: translateY(-15px);
+    }
 }
 
 #execute:hover {
@@ -93,9 +108,10 @@ body {
 
 #heading {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
-    margin-bottom: 50px;
+    margin-bottom: 10px;
+    margin-left: 50px;
 }
 
 #intro {
@@ -106,15 +122,8 @@ body {
     margin-top: 30px;
     padding-right: 30px;
     box-shadow: 5px 10px #888888;
-}
-
-h1 {
-    margin-left: 100px;
-    margin-top: 30px;
-    margin-bottom: 5px;
-    font-size: 90px;
-    color: #2e9cca;
-    text-shadow: 5px 5px #464866;
+    font-size: 20px;
+    width: 1220px;
 }
 
 .sliderTitle {
@@ -169,4 +178,30 @@ output {
 
 .slider input[type="range"]::-webkit-slider-thumb:hover {
     background: #aaabb8;
+}
+
+#wave {
+    margin-top: 40px;
+    position: relative;
+    font-size: 80px;
+}
+
+#wave span {
+    font-family: "Lora", sans-serif;
+    position: relative;
+    display: inline-block;
+    color: #2e9cca;
+    text-shadow: 5px 5px #464866;
+    text-transform: uppercase;
+    animation: waviy 2s infinite;
+    animation-delay: calc(.1s * var(--i));
+}
+
+@keyframes waviy {
+    0%, 40%, 100% {
+        transform: translateY(0)
+    }
+    20% {
+        transform: translateY(-20px)
+    }
 }
