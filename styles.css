@@ -5,3 +5,7 @@ body {
 #canvas {
     background-color: white;
 }
+
+#y-intercept {
+    fill: red;
+}
