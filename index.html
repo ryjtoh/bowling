@@ -9,7 +9,7 @@
     <link rel="icon" type="image/x-icon" href="imgs\favicon-32x32.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@500&family=Open+Sans:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Lora:wght@500&family=Open+Sans:wght@700&display=swap" rel="stylesheet">
   </head>
   <body>
     <div id="heading">
@@ -65,8 +65,8 @@
           <input type="range" id="y-intercept" min="-10" max="10" value="0" title="y-intercept of line" oninput="changeLine();this.nextElementSibling.value = this.value" />
           <output>0</output>
         </div>
-        <audio id="putt" src="sounds\putt.wav" preload="auto"></audio>
         <audio id="applause" src="sounds\applause.wav" preload="auto"></audio>
+        <audio id="putt" src="sounds\putt.wav" preload="auto"></audio>
         <audio id="fail" src="sounds\fail.mp3" preload="auto"></audio>
         <button id="execute" onclick="startSwing();playSound('putt')">Swing!</button>
       </div>

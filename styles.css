@@ -1,8 +1,16 @@
 body {
     background: url(imgs/golfcourse.png);
     background-color: #25274D;
-    font-family: "Lora", serif;
+    font-family: "Josefin Sans", serif;
     
+}
+
+output {
+    position: relative;
+    margin-left: none;
+    padding-left: 50px;
+    padding-right: 20px;
+    color: #00acee;
 }
 
 #canvas {
@@ -16,7 +24,7 @@ body {
 }
 
 #execute {
-    font-family: "Lora", serif;
+    font-family: "Josefin Sans", serif;
     color: #464866;
     margin-top: 40px;
     position: relative;
@@ -93,7 +101,7 @@ body {
     align-content: center;
     margin-bottom: 100px;
     margin-top: none;
-    font-family: "Lora", serif;
+    font-family: "Josefin Sans", serif;
     font-size: 50px;
     color: #2e9cca;
     width: 400px;
@@ -128,7 +136,7 @@ body {
 
 .sliderTitle {
     display:table;
-    font-family: "Lora", serif;
+    font-family: "Josefin Sans", serif;
     margin-top: 20px;
     margin-bottom: 10px;
     color: #2e9cca;
@@ -144,14 +152,6 @@ body {
     display: flex;
     align-items: center;
     box-shadow: 5px 10px #888888;
-}
-
-output {
-    position: relative;
-    margin-left: none;
-    padding-left: 50px;
-    padding-right: 20px;
-    color: #00acee;
 }
 
 .slider input[type="range"] {
@@ -187,7 +187,7 @@ output {
 }
 
 #wave span {
-    font-family: "Lora", sans-serif;
+    font-family: "Josefin Sans", sans-serif;
     position: relative;
     display: inline-block;
     color: #2e9cca;

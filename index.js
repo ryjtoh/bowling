@@ -12,10 +12,11 @@ var holes =
         ]
     }
 
-
+// Width and height of coordinate system
 canvas.width = 600
 canvas.height = 600
 
+// Origin x and y
 const centerWidth = canvas.width / 2
 const centerHeight = canvas.height / 2
 
@@ -40,7 +41,7 @@ var redHoleY
 var holeSlope
 var holeYInt
 
-// Save the state of the empty grid with default slope line
+// Variable to save the state of the empty grid with default slope line
 var emptyGrid
 
 // Workaround for chrome autoplay policy
@@ -58,9 +59,25 @@ document.getElementById("fail").volume = .1
 
 // Function to create grid
 function drawBoard() {
+    // Clear the board from existing holes and lines
     ctx.clearRect(0, 0, canvas.width, canvas.height)
+
+    // Draw the origin lines with different style
+    ctx.moveTo(centerWidth, 0)
+    ctx.lineTo(centerWidth, centerHeight * 2)
+    ctx.moveTo(0, centerHeight)
+    ctx.lineTo(centerWidth * 2, centerHeight)
+
+    ctx.lineWidth = 2
+    ctx.strokeStyle = "#FFFFFF"
+    ctx.lineCap = "round"
+    ctx.stroke()
+
+    // Change line width to be smaller for regular coordinate lines
+    ctx.lineWidth = 1
+
     // Draw the coordinate system lines
-    for (var x = 0; x <= sideLength; x += unit) {
+    for (var x = 0; x <= sideLength; x += unit * 2) {
         ctx.moveTo(0.5 + x, 0)
         ctx.lineTo(0.5 + x, sideLength)
         ctx.moveTo(0, 0.5 + x)
@@ -77,6 +94,9 @@ function drawBoard() {
     emptyGrid = ctx.getImageData(0, 0, canvas.width, canvas.height)
     document.getElementById("slope").value = 1
     document.getElementById("showYInt").value = 0
+
+    document.getElementById("showSlope").innerHTML = "1"
+    document.getElementById("showYInt").innerHTML = "0"
     // Draw y = x
     drawDefaultSlope()
 }
@@ -120,11 +140,9 @@ function changeLine() {
 
 
 
-//////////////////////
-// HELPER FUNCTIONS //
-//////////////////////
-
-
+//
+// HELPER FUNCTIONS 
+//
 
 // Finding the y value for the ending point of the line
 function findY1(slope) {
@@ -226,7 +244,7 @@ function outcome() {
         message = "Correct slope and y-intercept!"
     } else {
         playSound("fail")
-        message = "Not quite right... try again!"
+        message = "Not quite right... try another one!"
     }
     alert(message)
     drawBoard()
